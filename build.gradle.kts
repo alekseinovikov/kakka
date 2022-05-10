@@ -1,25 +1,25 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    base
     kotlin("jvm") version "1.6.20"
-    application
 }
 
-group = "com.kakka"
-version = "0.0.1-SNAPSHOT"
+allprojects {
+    apply(plugin = "org.jetbrains.kotlin.jvm")
 
-dependencies {
-    testImplementation(kotlin("test"))
-}
+    group = "com.kakka"
+    version = "0.0.1-SNAPSHOT"
 
-tasks.test {
-    useJUnitPlatform()
-}
+    repositories {
+        mavenCentral()
+    }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
-}
+    tasks.withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "11"
+    }
 
-application {
-    mainClass.set("MainKt")
+    dependencies {
+        api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1")
+    }
 }
